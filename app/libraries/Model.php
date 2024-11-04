@@ -40,6 +40,10 @@ class Model extends Database
         return $this->query("SELECT COUNT(`id`) as count FROM `$this->table`")->execute()->fetch()->count;
     }
 
+    public function limit(int $limit) {
+        return $this->query("SELECT * FROM `$this->table` ORDER BY `id` DESC LIMIT $limit")->execute()->get();
+    }
+
     public function find(int $id): mixed
     {
         return $this->query("SELECT * FROM `$this->table` WHERE `$this->primary_key` = :id")->execute(['id' => $id])->fetch();

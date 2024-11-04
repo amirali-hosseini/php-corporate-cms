@@ -12,7 +12,14 @@ class Pages extends Controller
      */
     public function index(): void
     {
-        $this->view('pages/index');
+        $services = $this->model('Service')->limit(6);
+        $portfolios = $this->model('Portfolio')->limit(8);
+        $plans = $this->model('Plan')->limit(3);
+        $testimonials = $this->model('Testimonial')->limit(4);
+        $members = $this->model('Member')->all();
+        $articles = $this->model('Article')->limit(3);
+
+        $this->view('pages/index',compact('services','portfolios','plans','testimonials','members','articles'));
     }
 
     /**
@@ -20,7 +27,10 @@ class Pages extends Controller
      */
     public function blog(): void
     {
-        $this->view('pages/blog');
+        $articles = $this->model('Article')->all();
+        $categories = $this->model('Category')->all();
+
+        $this->view('pages/blog',compact('articles','categories'));
     }
 
     /**
